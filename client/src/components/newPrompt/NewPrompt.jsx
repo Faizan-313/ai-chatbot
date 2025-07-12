@@ -24,17 +24,13 @@ function NewPrompt({data}) {
     const {getToken} = useAuth();
 
     const chat = model.startChat({
-        history: [data?.history.map(({role, parts})=>(
-            {
-                role,
-                parts: [
-                    {text:parts[0].text}
-                ]
-            }
-        ))],
-        generationConfig: {
-        }
-    })
+        history: data?.history?.map(({ role, parts }) => ({
+            role,
+            parts: [{ text: parts[0].text }]
+        })),
+        generationConfig: {}
+    });
+
 
     const queryClient = useQueryClient()
     const mutation = useMutation({
