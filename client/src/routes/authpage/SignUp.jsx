@@ -1,4 +1,4 @@
-import './signup.css';
+import './signUp.css';
 import { SignUp } from '@clerk/clerk-react';
 import React from 'react'
 
