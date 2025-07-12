@@ -89,16 +89,26 @@ app.post('/api/chats',ClerkExpressRequireAuth(), async (req, res)=>{
     }
 })
 
-app.get('/api/userChats', ClerkExpressRequireAuth(), async (req, res)=>{
+app.get('/api/userChats', ClerkExpressRequireAuth(), async (req, res) => {
     const userId = req.auth.userId;
-    try{
-        const userChats = await UserChats.find({userId});
-        res.status(200).send((userChats.length > 0 ? userChats[0]?.chats : []));
-    }catch(err){
-        console.log(err);
-        res.send(500).send("error fetching userChats")
+    try {
+        const userChats = await UserChats.findOne({ userId });
+
+        if (userChats) {
+        res.status(200).json(userChats);
+        } else {
+        // Return empty object with empty chats
+        res.status(200).json({
+            userId,
+            chats: []
+        });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error fetching userChats");
     }
-})
+});
+
 
 app.get('/api/chats/:id', ClerkExpressRequireAuth(), async (req, res)=>{
     const userId = req.auth.userId;

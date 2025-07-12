@@ -29,10 +29,19 @@ function ChatList() {
             <hr />
             <span className='title'>Recent Chats</span>
             <div className='list'>
-                {(status === "pending")? "loading..." : error ? "something went wrong" : data?.chats?.map((chat)=>
-                    <Link to={`/dashboard/chats/${chat._id}`} key={chat._id}>{chat.title}</Link>
-                )}
+                {status === "pending"
+                    ? "loading..."
+                    : error
+                    ? "something went wrong"
+                    : data?.chats?.length
+                    ? data.chats.map((chat) => (
+                        <Link to={`/dashboard/chats/${chat._id}`} key={chat._id}>
+                            {chat.title}
+                        </Link>
+                        ))
+                    : "No chats yet"}
             </div>
+
             <hr />
             <div className="upgrade">
                 <img src='/Logo.jpg' alt='logo' className='logo' />
