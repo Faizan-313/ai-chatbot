@@ -1,6 +1,6 @@
 import React from 'react'
 import './newPrompt.css';
-import Upload from '../upload/upload';
+import Upload from '../upload/Upload.jsx'
 import { IKImage } from 'imagekitio-react';
 import model  from '../../lib/gemini';
 import Markdown from 'react-markdown';
