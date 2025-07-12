@@ -13,11 +13,13 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json())
-
+console.log('Allowed origin from env:', process.env.CLIENT_URL);
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
 }));
+
+
 
 
 const connect = async () =>{
