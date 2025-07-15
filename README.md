@@ -82,7 +82,7 @@ npm run dev
 
 ## Contributing
 
-Contributions are welcome! Check the contribution.md for more information.
+Contributions are welcome! Check the contribution.md file for more information.
 
 ## License
 
