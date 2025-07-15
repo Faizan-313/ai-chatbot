@@ -1,56 +1,52 @@
 # Contributing to AI Chatbot
 
-Thanks for your interest in contributing! 🎉  
-We welcome bug reports, feature requests, and pull requests to improve the project.
+Thank you for your interest in contributing! 🎉  
+We welcome bug reports, feature requests, and pull requests to help improve this project.
 
-## 🛠 How to contribute
+## 🛠 How to Contribute
 
-1. **Fork** the repository and **clone** your fork locally.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-Make your changes and commit:
+1. **Fork** this repository and **clone** your fork locally.
+2. Create a new branch for your changes:
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git add .
+    git commit -m "Describe your changes"
+    ```
+4. Push your branch to your fork:
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+5. Open a Pull Request (PR) to the `main` branch of this repository.
 
-bash
-git commit -m "Add your message"
-Push to your fork:
+## 🐛 Reporting Bugs
 
-bash
-git push origin feature/your-feature-name
-Open a Pull Request to the main branch of this repo.
+If you find a bug, please [open an Issue](../../issues/new) and include:
 
-🐛 Reporting bugs
-If you find a bug:
+- A clear title and description.
+- Steps to reproduce the issue.
+- Screenshots or error logs, if possible.
 
-Open an Issue with:
+## ✨ Suggesting Features
 
-A clear title and description.
+To propose a new feature, [create an Issue](../../issues/new) and include:
 
-Steps to reproduce.
+- Why this feature would be useful.
+- (Optional) A sketch, example, or description.
 
-Screenshots or error logs (if possible).
+## ✅ Pull Request Checklist
 
-✨ Suggesting features
-    To propose a new feature:
+Before submitting a PR, please ensure:
 
-    Create an Issue with:
+- Code is properly formatted.
+- No console errors or warnings.
+- Changes are tested locally.
+- PR title is clear and descriptive.
 
-    Why this feature is useful.
+## 📄 License
 
-    (Optional) Sketch or example.
-
-✅ Pull request checklist
-    Before you submit a PR:
-
-    Code is properly formatted.
-
-    No console errors.
-
-    Tested locally.
-
-    PR title is clear and descriptive.
-
-📄 License
-By contributing, you agree your contributions will be licensed under the MIT License.
+By contributing, you agree that your contributions will be licensed under the MIT License.
 
 Thanks for helping make this project better! 🚀
