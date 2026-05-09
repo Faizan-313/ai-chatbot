@@ -5,8 +5,14 @@ const urlEndpoint = import.meta.env.VITE_IMAGE_KIT_ENDPOINT;
 const publicKey = import.meta.env.VITE_IMAGE_KIT_PUBLIC_KEY;
 
 const authenticator = async () => {
+    const base = import.meta.env.VITE_API_URL;
+    if (!base) {
+        throw new Error('Missing VITE_API_URL');
+    }
     try {
-        const response = await fetch("http://localhost:3000/api/upload");
+        const response = await fetch(`${base}/api/upload`, {
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             const errorText = await response.text();

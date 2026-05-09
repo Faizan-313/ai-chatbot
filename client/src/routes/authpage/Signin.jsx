@@ -1,8 +1,6 @@
 import './signin.css';
 import { SignIn } from '@clerk/clerk-react';
 
-import React from 'react'
-
 function Signin() {
   return (
     <div className='signInPage'>

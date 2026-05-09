@@ -1,29 +1,44 @@
 .rootLayout{
-    padding: 16px 64px;
-    height: 100vh;
+    padding: 16px 24px;
+    min-height: 100dvh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
+    @media screen and (min-width: 768px) {
+        padding: 16px 40px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        padding: 16px 64px;
+    }
+
     header{
         display: flex;
-        align-itmes: center;
+        align-items: center;
         justify-content: space-between;
+        flex-shrink: 0;
+        gap: 16px;
 
-        .logo{
-            display: flex;
+        > a {
+            display: inline-flex;
             align-items: center;
-            font-weight: bold;
             gap: 8px;
+            font-weight: 600;
+            color: #ececec;
         }
 
         img{
             width: 32px;
             height: 32px;
+            flex-shrink: 0;
         }
     }
 
     main{
         flex: 1;
-        overflow: hidden;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
     }
 }

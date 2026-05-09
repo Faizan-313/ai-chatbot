@@ -1,40 +1,103 @@
-.endChat{
-    padding-bottom: 100px;
+.endChat {
+    height: 1px;
+    margin-bottom: 8px;
 }
 
-.newForm{
-    width: 75%;
-    position: absolute;
+.newPrompt__status {
+    font-size: 0.8125rem;
+    color: var(--app-muted);
+    padding: 6px 4px 10px;
+}
+
+.newPrompt__previewImg {
+    border-radius: var(--app-radius-md);
+    border: 1px solid var(--app-border);
+    max-width: 100%;
+    height: auto;
+}
+
+.newForm {
+    position: sticky;
     bottom: 0;
-    background-color: #2c2937;
-    border-radius: 20px;
+    width: 100%;
+    max-width: min(820px, 100%);
+    margin: 0 auto;
+    margin-top: auto;
+    padding: 10px 12px;
+    background: rgba(12, 10, 20, 0.85);
+    border: 1px solid var(--app-border);
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.35);
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 0px 20px;
+    gap: 10px;
+    z-index: 2;
+}
 
-    input{
-        flex: 1;
-        padding: 20px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        color: #ececec
-    }
+.newForm input {
+    flex: 1;
+    padding: 12px 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--app-text);
+    font-size: 0.9375rem;
+}
 
-    button,label{
-        border-radius: 50%;
-        background-color: #605e68;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.newForm input::placeholder {
+    color: rgba(232, 230, 237, 0.35);
+}
 
-        img{
-            width: 16px;
-            height: 16px;
-        }
-    }
+.newForm input:disabled {
+    opacity: 0.55;
+}
+
+.newForm button {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: linear-gradient(165deg, #e2e8f0, #cbd5f5);
+    border: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.newForm button:hover:not(:disabled) {
+    transform: scale(1.04);
+}
+
+.newForm button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.newForm button img {
+    width: 16px;
+    height: 16px;
+}
+
+.newForm label {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--app-border);
+    cursor: pointer;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    transition: background 0.18s ease;
+}
+
+.newForm label:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.newForm label img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.88;
 }

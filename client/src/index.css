@@ -1,3 +1,17 @@
+:root {
+    --app-bg: #0a0812;
+    --app-surface: rgba(255, 255, 255, 0.04);
+    --app-surface-2: #16131f;
+    --app-border: rgba(255, 255, 255, 0.08);
+    --app-text: #e8e6ed;
+    --app-muted: rgba(232, 230, 237, 0.6);
+    --app-accent: #3b82f6;
+    --app-accent-soft: rgba(59, 130, 246, 0.18);
+    --app-radius-lg: 16px;
+    --app-radius-md: 12px;
+    --app-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -5,10 +19,12 @@
 }
 
 body{
-    background-color: #0e0c16;
-    color: #ececec;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    background-color: var(--app-bg); 
+    color: var(--app-text);
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-feature-settings: "cv02", "cv11";
+    -webkit-font-smoothing: antialiased;
 }
 
 a{
@@ -17,5 +33,6 @@ a{
 }
 
 .logo{
-    mix-blend-mode: screenfilter: brightness(0) invert(1);;
+    mix-blend-mode: screen;
+    filter: brightness(0) invert(1);
 }

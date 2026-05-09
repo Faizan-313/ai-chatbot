@@ -17,7 +17,7 @@ function DashboardLayout() {
     }, [isLoaded, userId, navigate])
 
     if(!isLoaded) {
-        return <div>Loading...</div>
+        return <div className="dashboardLayout__loading">Loading…</div>
     }
 
     return (
