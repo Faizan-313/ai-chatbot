@@ -42,52 +42,48 @@ app.get('/api/upload', (req,res)=>{
     res.send(result);
 })
 
-app.post('/api/chats',ClerkExpressRequireAuth(), async (req, res)=>{
+app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res) => {
     const userId = req.auth.userId;
-    const {text} = req.body;
-    try{
-        //create a new chat
-
+    const text = req.body?.text != null ? String(req.body.text).trim() : '';
+    if (!text) {
+        return res.status(400).json({ error: 'Message is required' });
+    }
+    try {
         const newChat = new Chat({
-            userId: userId,
-            history:[{role:"user",parts:[{text}]}]
-        })
-        await newChat.validate();  
+            userId,
+            history: [{ role: 'user', parts: [{ text }] }],
+        });
+        await newChat.validate();
 
         const savedChat = await newChat.save();
+        const chatId = savedChat._id.toString();
+        const title = text.substring(0, 40);
 
-        //check if the userchats exits
-        const userChats = await UserChats.find({userId: userId})
+        const userChats = await UserChats.find({ userId });
 
-        //if it doesnt exist create a new one and add the chat in the chats array
-        if(!userChats.length){
+        if (!userChats.length) {
             const newUserChats = new UserChats({
-                userId: userId,
-                chats:[
-                    {
-                        _id: savedChat.id,
-                        title: text.substring(0,40)
-                    }
-                ]
-            })
+                userId,
+                chats: [{ _id: chatId, title }],
+            });
             await newUserChats.save();
-        }else{
-            //if exits ,push the chat to the exiting array
-            await UserChats.updateOne({userId: userId}, {
-                $push:{
-                    chats:{
-                        _id: savedChat._id,
-                        title: text.substring(0,40),
-                    }
+        } else {
+            await UserChats.updateOne(
+                { userId },
+                {
+                    $push: {
+                        chats: { _id: chatId, title },
+                    },
                 }
-            })
-            res.status(201).json({id: newChat._id});
+            );
         }
-    }catch(err){
-        console.log(err);
-        res.status(500).send("Error creating chat")
+
+        return res.status(201).json({ id: chatId });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Error creating chat' });
     }
-})
+});
 
 app.get('/api/userChats', ClerkExpressRequireAuth(), async (req, res) => {
     const userId = req.auth.userId;
@@ -105,7 +101,7 @@ app.get('/api/userChats', ClerkExpressRequireAuth(), async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error fetching userChats");
+        return res.status(500).json({ error: 'Error fetching chats' });
     }
 });
 
@@ -115,14 +111,14 @@ app.get('/api/chats/:id', ClerkExpressRequireAuth(), async (req, res)=>{
     try{
         const chat = await Chat.findOne({_id: req.params.id, userId});
         if (!chat) {
-            return res.status(404).send("Chat not found");
+            return res.status(404).json({ error: 'Chat not found' });
         }
-        res.status(200).send(chat);
-    }catch(err){
-        console.log(err);
-        res.status(500).send("error fetching the chat")
+        return res.status(200).json(chat);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Error fetching chat' });
     }
-})
+});
 
 app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res)=>{
     const userId = req.auth.userId;
@@ -142,17 +138,20 @@ app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res)=>{
                 }
             }
         })
-        res.status(200).send(updatedChat)
-    }catch(err){
-        console.log(err);
-        res.status(500).send("error updating chat")
+        return res.status(200).json(updatedChat);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Error updating chat' });
     }
-})
+});
 
-app.use((err,req,res,next)=>{
-    console.log(err.stack);
-    res.status(401).send("unauthenticated")
-})
+app.use((err, req, res, next) => {
+    console.error(err?.stack || err);
+    if (res.headersSent) {
+        return;
+    }
+    return res.status(401).json({ error: 'Unauthenticated' });
+});
 
 app.listen(port, ()=>{
     connect()
